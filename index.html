@@ -32,11 +32,12 @@ color:#222;
 margin:0;
 }
 
-/* Menu Sections */
+/* Menu Layout */
+
 .menuContainer{
-margin-top:80px;
+margin-top:90px;
 display:flex;
-gap:200px;
+gap:220px;
 }
 
 .menuCard{
@@ -46,8 +47,9 @@ align-items:center;
 }
 
 /* Menu Titles */
+
 .menuTitle{
-font-size:36px;
+font-size:38px;
 font-weight:700;
 margin-bottom:50px;
 }
@@ -60,46 +62,81 @@ color:#c62828;
 color:#1e3a8a;
 }
 
-/* Feedback Buttons */
+/* Button Row */
+
 .buttonRow{
 display:flex;
 gap:40px;
 }
 
+/* Feedback Buttons */
+
 .feedbackBtn{
-width:180px;
-height:180px;
+width:200px;
+height:200px;
 border-radius:50%;
 border:none;
-font-size:48px;
+font-size:60px;
 cursor:pointer;
-box-shadow:0 18px 45px rgba(0,0,0,0.15);
-transition:all .25s ease;
+color:white;
 display:flex;
 align-items:center;
 justify-content:center;
-color:white;
+box-shadow:0 20px 55px rgba(0,0,0,0.2);
+transition:all .25s ease;
+position:relative;
+overflow:hidden;
 }
 
-/* Korean Menu Buttons */
+/* Korean Buttons */
+
 .koreanBtn{
-background:#c62828;
+background:linear-gradient(145deg,#d32f2f,#b71c1c);
 }
 
-/* American Menu Buttons */
+/* American Buttons */
+
 .americanBtn{
-background:#1e3a8a;
+background:linear-gradient(145deg,#1e3a8a,#0f2557);
 }
+
+/* Hover glow */
 
 .feedbackBtn:hover{
-transform:scale(1.1);
+transform:scale(1.08);
+box-shadow:0 28px 70px rgba(0,0,0,0.25);
 }
 
+/* Press effect */
+
 .feedbackBtn:active{
-transform:scale(.95);
+transform:scale(.93);
+}
+
+/* Ripple effect */
+
+.feedbackBtn::after{
+content:"";
+position:absolute;
+width:0;
+height:0;
+border-radius:50%;
+background:rgba(255,255,255,.4);
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+opacity:0;
+transition:width .4s ease,height .4s ease,opacity .4s;
+}
+
+.feedbackBtn:active::after{
+width:220px;
+height:220px;
+opacity:1;
 }
 
 /* Popup */
+
 #popup{
 position:fixed;
 top:50%;
