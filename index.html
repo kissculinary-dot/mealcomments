@@ -2,88 +2,103 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Customer Feedback</title>
+<title>Meal Program Feedback</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
 
 body{
 margin:0;
 font-family:'Montserrat',sans-serif;
-background:#f4f7fb;
+background:linear-gradient(180deg,#f7f9fc,#eef2f7);
 display:flex;
-flex-direction:column;
 align-items:center;
 justify-content:center;
-height:100vh;
-text-align:center;
+min-height:100vh;
 padding:20px;
+}
+
+/* MAIN CARD */
+
+.container{
+background:white;
+border-radius:18px;
+padding:28px;
+max-width:420px;
+width:100%;
+box-shadow:0 15px 40px rgba(0,0,0,0.12);
+text-align:center;
 }
 
 /* HEADER */
 
 h1{
-font-size:38px;
+font-size:20px;
+font-weight:700;
+line-height:1.4;
+margin-bottom:8px;
 color:#222;
-max-width:900px;
-margin-bottom:10px;
 }
 
 .subtitle{
+font-size:14px;
 font-style:italic;
-font-size:20px;
-color:#666;
-margin-bottom:40px;
+color:#6b7280;
+margin-bottom:24px;
 }
 
 /* FORM */
 
-.formContainer{
-background:white;
-padding:40px;
-border-radius:14px;
-box-shadow:0 20px 50px rgba(0,0,0,0.15);
-width:100%;
-max-width:600px;
-}
-
 label{
-font-weight:700;
 display:block;
-margin-bottom:10px;
-font-size:18px;
+font-weight:600;
+font-size:14px;
+margin-bottom:6px;
+text-align:left;
 }
 
 select, textarea{
 width:100%;
-padding:12px;
-font-size:16px;
-border-radius:8px;
-border:1px solid #ccc;
-margin-bottom:25px;
+padding:14px;
+font-size:15px;
+border-radius:10px;
+border:1px solid #d1d5db;
+margin-bottom:18px;
 font-family:'Montserrat',sans-serif;
+box-sizing:border-box;
+background:#fafafa;
+}
+
+select:focus, textarea:focus{
+outline:none;
+border-color:#3b82f6;
+background:white;
 }
 
 textarea{
-height:120px;
+height:110px;
 resize:none;
 }
 
+/* BUTTON */
+
 button{
-background:#1e3a8a;
-color:white;
+width:100%;
+padding:16px;
 border:none;
-padding:15px 40px;
-font-size:18px;
-border-radius:10px;
+border-radius:12px;
+background:linear-gradient(135deg,#2563eb,#1d4ed8);
+color:white;
+font-size:16px;
+font-weight:600;
 cursor:pointer;
-transition:.2s;
+transition:all .2s;
 }
 
-button:hover{
-transform:scale(1.05);
+button:active{
+transform:scale(.97);
 }
 
 /* POPUP */
@@ -94,22 +109,23 @@ top:50%;
 left:50%;
 transform:translate(-50%,-50%) scale(.8);
 background:white;
-padding:40px 70px;
+padding:26px 34px;
 border-radius:14px;
-box-shadow:0 25px 60px rgba(0,0,0,0.25);
-font-size:28px;
+box-shadow:0 20px 50px rgba(0,0,0,0.25);
+font-size:18px;
 font-weight:600;
 opacity:0;
 pointer-events:none;
+text-align:center;
 }
 
 .show{
-animation:popup .45s forwards;
+animation:popup .4s forwards;
 }
 
 @keyframes popup{
 0%{transform:translate(-50%,-50%) scale(.8);opacity:0}
-50%{transform:translate(-50%,-50%) scale(1.05);opacity:1}
+60%{transform:translate(-50%,-50%) scale(1.05);opacity:1}
 100%{transform:translate(-50%,-50%) scale(1);opacity:1}
 }
 
@@ -117,7 +133,7 @@ animation:popup .45s forwards;
 
 .heart{
 position:fixed;
-font-size:22px;
+font-size:20px;
 animation:floatHeart 2.2s ease-out forwards;
 pointer-events:none;
 }
@@ -128,7 +144,7 @@ transform:translateY(0) scale(1);
 opacity:1;
 }
 100%{
-transform:translateY(-180px) scale(1.6);
+transform:translateY(-160px) scale(1.6);
 opacity:0;
 }
 }
@@ -138,18 +154,19 @@ opacity:0;
 
 <body>
 
+<div class="container">
+
 <h1>
 How satisfied were you with the company meal programs today
 (Breakfast, Korean/American Lunch, Dinner)?
 </h1>
 
 <div class="subtitle">
-Please Specify the Meal Type
+Please specify the meal type
 </div>
 
-<div class="formContainer">
-
 <label>Meal Type</label>
+
 <select id="mealType">
 <option value="">Select Meal</option>
 <option value="Breakfast">Breakfast</option>
@@ -159,7 +176,8 @@ Please Specify the Meal Type
 </select>
 
 <label>Comments</label>
-<textarea id="comment" placeholder="Leave your feedback here..."></textarea>
+
+<textarea id="comment" placeholder="Share your feedback..."></textarea>
 
 <button onclick="submitFeedback()">Submit Feedback</button>
 
@@ -183,7 +201,7 @@ heart.innerHTML="❤️";
 
 heart.style.left=Math.random()*window.innerWidth+"px";
 heart.style.top=Math.random()*window.innerHeight+"px";
-heart.style.fontSize=(18+Math.random()*24)+"px";
+heart.style.fontSize=(18+Math.random()*18)+"px";
 heart.style.animationDuration=(1.5+Math.random()*1.5)+"s";
 
 document.body.appendChild(heart);
