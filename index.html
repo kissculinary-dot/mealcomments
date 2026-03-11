@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Customer Feedback</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 body{
@@ -16,126 +16,77 @@ background:#f4f7fb;
 display:flex;
 flex-direction:column;
 align-items:center;
-justify-content:flex-start;
+justify-content:center;
 height:100vh;
 text-align:center;
+padding:20px;
 }
 
-/* Header */
-.header{
-margin-top:80px;
-}
+/* HEADER */
 
-.header h1{
-font-size:54px;
-color:#222;
-margin:0;
-}
-
-/* Menu Layout */
-
-.menuContainer{
-margin-top:90px;
-display:flex;
-gap:220px;
-}
-
-.menuCard{
-display:flex;
-flex-direction:column;
-align-items:center;
-}
-
-/* Menu Titles */
-
-.menuTitle{
+h1{
 font-size:38px;
+color:#222;
+max-width:900px;
+margin-bottom:10px;
+}
+
+.subtitle{
+font-style:italic;
+font-size:20px;
+color:#666;
+margin-bottom:40px;
+}
+
+/* FORM */
+
+.formContainer{
+background:white;
+padding:40px;
+border-radius:14px;
+box-shadow:0 20px 50px rgba(0,0,0,0.15);
+width:100%;
+max-width:600px;
+}
+
+label{
 font-weight:700;
-margin-bottom:50px;
+display:block;
+margin-bottom:10px;
+font-size:18px;
 }
 
-.korean{
-color:#c62828;
+select, textarea{
+width:100%;
+padding:12px;
+font-size:16px;
+border-radius:8px;
+border:1px solid #ccc;
+margin-bottom:25px;
+font-family:'Montserrat',sans-serif;
 }
 
-.american{
-color:#1e3a8a;
+textarea{
+height:120px;
+resize:none;
 }
 
-/* Button Row */
-
-.buttonRow{
-display:flex;
-gap:40px;
-}
-
-/* Feedback Buttons */
-
-.feedbackBtn{
-width:200px;
-height:200px;
-border-radius:50%;
-border:none;
-font-size:60px;
-cursor:pointer;
+button{
+background:#1e3a8a;
 color:white;
-display:flex;
-align-items:center;
-justify-content:center;
-box-shadow:0 20px 55px rgba(0,0,0,0.2);
-transition:all .25s ease;
-position:relative;
-overflow:hidden;
+border:none;
+padding:15px 40px;
+font-size:18px;
+border-radius:10px;
+cursor:pointer;
+transition:.2s;
 }
 
-/* Korean Buttons */
-
-.koreanBtn{
-background:linear-gradient(145deg,#d32f2f,#b71c1c);
+button:hover{
+transform:scale(1.05);
 }
 
-/* American Buttons */
-
-.americanBtn{
-background:linear-gradient(145deg,#1e3a8a,#0f2557);
-}
-
-/* Hover glow */
-
-.feedbackBtn:hover{
-transform:scale(1.08);
-box-shadow:0 28px 70px rgba(0,0,0,0.25);
-}
-
-/* Press effect */
-
-.feedbackBtn:active{
-transform:scale(.93);
-}
-
-/* Ripple effect */
-
-.feedbackBtn::after{
-content:"";
-position:absolute;
-width:0;
-height:0;
-border-radius:50%;
-background:rgba(255,255,255,.4);
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-opacity:0;
-transition:width .4s ease,height .4s ease,opacity .4s;
-}
-
-.feedbackBtn:active::after{
-width:220px;
-height:220px;
-opacity:1;
-}
-
-/* Popup */
+/* POPUP */
 
 #popup{
 position:fixed;
@@ -161,36 +112,56 @@ animation:popup .45s forwards;
 50%{transform:translate(-50%,-50%) scale(1.05);opacity:1}
 100%{transform:translate(-50%,-50%) scale(1);opacity:1}
 }
+
+/* HEARTS */
+
+.heart{
+position:fixed;
+font-size:22px;
+animation:floatHeart 2.2s ease-out forwards;
+pointer-events:none;
+}
+
+@keyframes floatHeart{
+0%{
+transform:translateY(0) scale(1);
+opacity:1;
+}
+100%{
+transform:translateY(-180px) scale(1.6);
+opacity:0;
+}
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="header">
-<h1>How was your meal today?</h1>
+<h1>
+How satisfied were you with the company meal programs today
+(Breakfast, Korean/American Lunch, Dinner)?
+</h1>
+
+<div class="subtitle">
+Please Specify the Meal Type
 </div>
 
-<div class="menuContainer">
+<div class="formContainer">
 
-<!-- Korean Menu -->
-<div class="menuCard">
-<div class="menuTitle korean">Korean Menu</div>
+<label>Meal Type</label>
+<select id="mealType">
+<option value="">Select Meal</option>
+<option value="Breakfast">Breakfast</option>
+<option value="Korean Lunch">Korean Lunch</option>
+<option value="American Lunch">American Lunch</option>
+<option value="Dinner">Dinner</option>
+</select>
 
-<div class="buttonRow">
-<button class="feedbackBtn koreanBtn" data-menu="Korean Menu" data-response="Loved it">👍</button>
-<button class="feedbackBtn koreanBtn" data-menu="Korean Menu" data-response="Needs Improvement">👎</button>
-</div>
-</div>
+<label>Comments</label>
+<textarea id="comment" placeholder="Leave your feedback here..."></textarea>
 
-<!-- American Menu -->
-<div class="menuCard">
-<div class="menuTitle american">American Menu</div>
-
-<div class="buttonRow">
-<button class="feedbackBtn americanBtn" data-menu="American Menu" data-response="Loved it">👍</button>
-<button class="feedbackBtn americanBtn" data-menu="American Menu" data-response="Needs Improvement">👎</button>
-</div>
-</div>
+<button onclick="submitFeedback()">Submit Feedback</button>
 
 </div>
 
@@ -198,35 +169,74 @@ animation:popup .45s forwards;
 
 <script>
 
-const SCRIPT_URL="https://script.google.com/macros/s/AKfycbwuox1am4aOU3PRF1NaS3Iho8XfqLBme8dZUyox53MSvzF4pjQdzzN1bYXIhUOb10mB1Q/exec";
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbztv9Z_PAwtOFhxsiF2vlexbcbqD2yE54ddvDyFT94hI6jd9uq8LtWn3KTtsQbJk0Gy/exec";
 
-const buttons=document.querySelectorAll(".feedbackBtn");
+/* HEARTS */
 
-buttons.forEach(btn=>{
-btn.addEventListener("click",()=>{
+function showHearts(){
 
-const menu=btn.dataset.menu;
-const response=btn.dataset.response;
+for(let i=0;i<20;i++){
 
-fetch(SCRIPT_URL,{
-method:"POST",
-mode:"no-cors",
-body:JSON.stringify({
-menu:menu,
-response:response,
-timestamp:new Date().toISOString()
-})
-});
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*window.innerWidth+"px";
+heart.style.top=Math.random()*window.innerHeight+"px";
+heart.style.fontSize=(18+Math.random()*24)+"px";
+heart.style.animationDuration=(1.5+Math.random()*1.5)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),2500);
+
+}
+
+}
+
+/* POPUP */
+
+function showPopup(){
 
 const popup=document.getElementById("popup");
+
 popup.classList.add("show");
 
 setTimeout(()=>{
 popup.classList.remove("show");
 },1800);
 
+}
+
+/* SUBMIT */
+
+function submitFeedback(){
+
+const meal=document.getElementById("mealType").value;
+const comment=document.getElementById("comment").value;
+
+if(!meal){
+alert("Please select a meal type.");
+return;
+}
+
+fetch(SCRIPT_URL,{
+method:"POST",
+mode:"no-cors",
+body:JSON.stringify({
+menu:meal,
+comment:comment,
+timestamp:new Date().toISOString()
+})
 });
-});
+
+showHearts();
+showPopup();
+
+document.getElementById("comment").value="";
+document.getElementById("mealType").value="";
+
+}
 
 </script>
 
